@@ -1,10 +1,18 @@
 import React from "react";
-import Counter from "./Counter";
+// import EffectEx from "./EffectEx";
+// import ContextEx from "./ContextEx";
+// import ReducerEx from "./ReducerEx";
+// import StateEx from "./StateEx";
+import MemoEx from "./MemoEx";
 
 const App = () => {
-  return (
+  return (   
     <>
-      <Counter />
+      {/* <EffectEx />
+      <ContextEx />
+      <ReducerEx />
+      <StateEx /> */}
+      <MemoEx />
     </>
   );
 }
