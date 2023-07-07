@@ -1,10 +1,12 @@
 import React from "react";
-import Counter from "./Counter";
+import EffectEx from "./EffectEx";
+import ContextEx from "./ContextEx";
 
 const App = () => {
   return (
     <>
-      <Counter />
+      <EffectEx />
+      <ContextEx />
     </>
   );
 };
