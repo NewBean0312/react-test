@@ -7,7 +7,6 @@ function StopWatch() {
 
   const resume = () => {
     timeoutId = setTimeout(() => setNum(num + 1), 1000);
-    
   }
 
   return (

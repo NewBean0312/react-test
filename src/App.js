@@ -1,18 +1,11 @@
-import React from "react";
-import EffectEx from "./EffectEx";
-import ContextEx from "./ContextEx";
-import ReducerEx from "./ReducerEx";
-import MemoEx from "./MemoEx";
-import StopWatch from "./StopWatch";
+// import StopWatch from "./StopWatch";
+import NumberCounter from "./NumberCounter";
 
 const App = () => {
   return (
     <>
-      {/* <EffectEx />
-      <ContextEx />
-      <ReducerEx />
-      <MemoEx /> */}
-      <StopWatch />
+      {/* <StopWatch /> */}
+      <NumberCounter />
     </>
   );
 };
