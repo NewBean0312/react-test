@@ -4,12 +4,15 @@ const NumberCounter = () => {
   const [no, setNo] = useState(0);
 
   // 별도의 변수로 분리
-  const noIsEvenDiv = (
-    <>
-      <hr />
-      <span>짝수입니다.</span>
-    </>
-  );
+  const noIsEvenDiv =
+    no % 2 == 0 ? (
+      <>
+        <hr />
+        <span>짝수입니다.</span>
+      </>
+    ) : (
+      <></>
+    );
 
   return (
     <>
