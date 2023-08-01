@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-function ProductListItem() {
-  const imNo = 1;
-  const productName = "MAC BOOK AIR";
-  const productPriceFormatted = "4,340,000원";
+function ProductListItem(props) {
+  const imgNo = props.imgNo;
+  const productName = props.name;
+  const productPriceFormatted = props.productPriceFormatted;
   return (
     <>
       <div
@@ -13,7 +13,7 @@ function ProductListItem() {
           gap: "10px",
         }}
       >
-        <img src={`https://picsum.photos/id/${imNo}/400/400`} />
+        <img src={`https://picsum.photos/id/${imgNo}/400/400`} />
         <div
           style={{
             textAlign: "center",
