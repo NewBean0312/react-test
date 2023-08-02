@@ -1,8 +1,9 @@
 // import StopWatch from "./StopWatch";
 // import NumberCounter from "./NumberCounter";
 // import Popup from "./Popup";
+import ProdList from "./ProdList";
 
-import ProductListItem from "./ProductListItem";
+import "./App.css";
 
 const App = () => {
   return (
@@ -10,21 +11,7 @@ const App = () => {
       {/* <StopWatch /> */}
       {/* <NumberCounter /> */}
       {/* <Popup /> */}
-      <div style={{ display: "flex", gap: "10px" }}>
-        <ProductListItem
-          imgNo={201}
-          name="MAC BOOK AIR"
-          productPriceFormatted="1,140,000"
-        />
-        <ProductListItem 
-          imgNo={1}
-          name="MAC BOOK PRO"
-          productPriceFormatted="3,320,000"/>
-        <ProductListItem 
-          imgNo={2}
-          name="MAC BOOK PLUS"
-          productPriceFormatted="4,340,000"/>
-      </div>
+      <ProdList />
     </>
   );
 };
