@@ -8,7 +8,7 @@ import "./App.css";
 
 const App = () => {
   const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const arr = nums.map((el) => <li>내용 {el}</li>);
+  const arr = nums.map((el, index) => <li key={index}>내용 {el}</li>);
 
   // const arr = [<li>내용1</li>, <li>내용2</li>, <li>내용3</li>];
 
