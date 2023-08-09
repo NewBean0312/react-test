@@ -7,6 +7,7 @@
 // import RefEx from "./RefEx";
 //import RefRemoveEx from "./RefRemoveEx";
 import RefModifyEx from "./RefModifyEx";
+import Notice from "./Notice";
 
 
 import "./App.css";
@@ -22,7 +23,8 @@ const App = () => {
       {/* <FormEx /> */}
       {/* <RefEx /> */}
       {/* <RefRemoveEx /> */}
-      <RefModifyEx />
+      {/* <RefModifyEx /> */}
+      <Notice />
     </>
   );
 };
