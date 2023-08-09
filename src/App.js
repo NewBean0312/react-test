@@ -4,7 +4,10 @@
 // import ProdList from "./ProdList";
 // import NoRecord from "./NoRecord";
 // import FormEx from "./FormEx";
-import RefEx from "./RefEx";
+// import RefEx from "./RefEx";
+//import RefRemoveEx from "./RefRemoveEx";
+import RefModifyEx from "./RefModifyEx";
+
 
 import "./App.css";
 
@@ -17,7 +20,9 @@ const App = () => {
       {/* <ProdList className="container mx-auto" /> */}
       {/* <NoRecord /> */}
       {/* <FormEx /> */}
-      <RefEx />
+      {/* <RefEx /> */}
+      {/* <RefRemoveEx /> */}
+      <RefModifyEx />
     </>
   );
 };
