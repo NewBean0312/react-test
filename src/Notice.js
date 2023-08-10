@@ -1,16 +1,29 @@
+import { useState } from "react";
 import classnames from "https://cdn.skypack.dev/classnames";
 
+let NotifyOnce__workDone = false;
+
 function NotifyOnce({ children }) {
-  setTimeout(function () {
-    console.log("실행됨");
-  }, 1000);
+  const [visible, setVisible] = useState(false);
+
+  if (NotifyOnce__workDone == false) {
+    setTimeout(function () {
+      setVisible(true);
+    }, 1000);
+  
+    setTimeout(function () {
+      setVisible(false);
+    }, 3000);
+
+    NotifyOnce__workDone = true;
+  }
 
   return (
     <div
       className={classnames(
         "fixed transition-all right-[10px]",
-        { "top-[-60px]": true },
-        { "top-[10px]": false }
+        { "top-[-60px]": !visible },
+        { "top-[10px]": visible }
       )}
     >
       {children}
