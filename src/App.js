@@ -2,53 +2,24 @@ import React, { useState } from "react";
 
 import "./App.css";
 
-function isPrimeNumber(no) {
-  for (let i = 2; i < no; i++) {
-    if (i * i > no) {
-      break;
-    }
+let SubCallCount = 0;
 
-    if (no % i == 0) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-function getPrimeNumbers(max) {
-  const primeNumbers = [];
-
-  for (let i = 2; i <= max; i++) {
-    if (isPrimeNumber(i)) {
-      primeNumbers.push(i);
-    }
-  }
-
-  return primeNumbers;
-}
-
-function getPrimeNumbersCount(max) {
-  return getPrimeNumbers(max).length;
-}
-
-let PrimeNosCountCallCount = 0;
-
-function PrimeNosCount({ max }) {
-  PrimeNosCountCallCount++;
-  console.log(`PrimeNosCountCallCount : ${PrimeNosCountCallCount}`);
-  const count = getPrimeNumbersCount(max);
+function Sub({ no1, no2 }) {
+  SubCallCount++;
+  console.log(`SubCallCount : ${SubCallCount}`);
 
   return (
-    <div style={{ border: "10px solid black", padding: 100 }}>
-      1부터 {max}사이에 존재하는 소수의 개수 : {count}
-    </div>
+    <>
+      <div style={{ border: "10px solid red", padding: 10 }}>
+        서브 : {no1 + no2}
+      </div>
+    </>
   );
 }
 
-const MemoisedPrimeNosCount = React.memo(PrimeNosCount);
-
 let AppCallCount = 0;
+
+const MemoisedSub = React.memo(Sub);
 
 function App() {
   AppCallCount++;
@@ -58,17 +29,10 @@ function App() {
 
   return (
     <>
-      <MemoisedPrimeNosCount max={100} />
-      <hr />
-      <MemoisedPrimeNosCount max={200} />
-      <hr />
-      <MemoisedPrimeNosCount max={300} />
-      <hr />
-      <MemoisedPrimeNosCount max={5000000} />
-      <hr />
+      <div>안녕하세요</div>
       <button onClick={() => setNo(no + 1)}>버튼 : {no}</button>
       <hr />
-      <MemoisedPrimeNosCount max={no} />
+      <MemoisedSub no1={10} no2={no} />
     </>
   );
 }
