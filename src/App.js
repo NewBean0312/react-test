@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 import "./App.css";
 
@@ -33,7 +33,13 @@ function getPrimeNumbersCount(max) {
 }
 
 function PrimeNosCount({ max }) {
-  const count = getPrimeNumbersCount(max);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const count = getPrimeNumbersCount(max);
+    setCount(count);
+  }, [max]);
+  
   return (
     <div style={{ border: "10px solid black", padding: 100 }}>
       1부터 {max}사이에 존재하는 소수의 개수 : {count}
@@ -47,6 +53,8 @@ function App() {
   AppCallCount++;
   console.log(`AppCallCount : ${AppCallCount}`);
 
+  const [no, setNo] = useState(0);
+
   return (
     <>
       <PrimeNosCount max={100} />
@@ -55,8 +63,9 @@ function App() {
       <hr />
       <PrimeNosCount max={300} />
       <hr />
-      <PrimeNosCount max={1000000} />
+      <PrimeNosCount max={5000000} />
       <hr />
+      <button onClick={() => setNo(no + 1)}>버튼 : {no}</button>
     </>
   );
 }
