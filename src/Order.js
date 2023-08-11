@@ -7,15 +7,12 @@ function Order() {
     "홀스래디쉬 소스",
     "스윗어니언 소스",
     "마라 소스",
+    "칠리 소스",
   ];
 
-  const [optionCheckeds, setOptionCheckeds] = useState([
-    false,
-    false,
-    true,
-    true,
-    true,
-  ]);
+  const [optionCheckeds, setOptionCheckeds] = useState(
+    new Array(options.length).fill(false)
+  );
 
   const toggleOptionCheck = (index) => {
     const newOptionCheckeds = optionCheckeds.map((el, _index) =>
