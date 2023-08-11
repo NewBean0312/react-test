@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 import "./App.css";
 
 let SubCallCount = 0;
 
-function Sub({ no1, no2 }) {
+function Sub({ no1, no2, calculateFunc }) {
   SubCallCount++;
   console.log(`SubCallCount : ${SubCallCount}`);
 
   return (
     <>
       <div style={{ border: "10px solid red", padding: 10 }}>
-        서브 : {no1 + no2}
+        입력 : {no1}, {no2}
+        <br />
+        결과 : {calculateFunc(no1, no2)}
       </div>
     </>
   );
@@ -25,14 +27,19 @@ function App() {
   AppCallCount++;
   console.log(`AppCallCount : ${AppCallCount}`);
 
-  const [no, setNo] = useState(0);
+  const [no1, setNo1] = useState(0);
+  const [no2, setNo2] = useState(0);
+  
+  const calculateFunc = useCallback((a, b) => a + b + no1, [no1]);
 
   return (
     <>
       <div>안녕하세요</div>
-      <button onClick={() => setNo(no + 1)}>버튼 : {no}</button>
+      <button onClick={() => setNo1(no1 + 1)}>버튼1 : {no1}</button>
       <hr />
-      <MemoisedSub no1={10} no2={no} />
+      <button onClick={() => setNo2(no2 + 1)}>버튼2 : {no2}</button>
+      <hr />
+      <MemoisedSub no1={10} no2={20} calculateFunc={calculateFunc} />
     </>
   );
 }
