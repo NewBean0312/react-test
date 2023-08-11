@@ -33,13 +33,8 @@ function getPrimeNumbersCount(max) {
 }
 
 function PrimeNosCount({ max }) {
-  const [count, setCount] = useState(0);
+  const count = useMemo(() => getPrimeNumbersCount(max), [max]);
 
-  useEffect(() => {
-    const count = getPrimeNumbersCount(max);
-    setCount(count);
-  }, [max]);
-  
   return (
     <div style={{ border: "10px solid black", padding: 100 }}>
       1부터 {max}사이에 존재하는 소수의 개수 : {count}
