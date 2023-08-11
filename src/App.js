@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState } from "react";
 
 import "./App.css";
 
@@ -32,8 +32,12 @@ function getPrimeNumbersCount(max) {
   return getPrimeNumbers(max).length;
 }
 
+let PrimeNosCountCallCount = 0;
+
 function PrimeNosCount({ max }) {
-  const count = useMemo(() => getPrimeNumbersCount(max), [max]);
+  PrimeNosCountCallCount++;
+  console.log(`PrimeNosCountCallCount : ${PrimeNosCountCallCount}`);
+  const count = getPrimeNumbersCount(max);
 
   return (
     <div style={{ border: "10px solid black", padding: 100 }}>
@@ -41,6 +45,8 @@ function PrimeNosCount({ max }) {
     </div>
   );
 }
+
+const MemoisedPrimeNosCount = React.memo(PrimeNosCount);
 
 let AppCallCount = 0;
 
@@ -52,15 +58,17 @@ function App() {
 
   return (
     <>
-      <PrimeNosCount max={100} />
+      <MemoisedPrimeNosCount max={100} />
       <hr />
-      <PrimeNosCount max={200} />
+      <MemoisedPrimeNosCount max={200} />
       <hr />
-      <PrimeNosCount max={300} />
+      <MemoisedPrimeNosCount max={300} />
       <hr />
-      <PrimeNosCount max={5000000} />
+      <MemoisedPrimeNosCount max={5000000} />
       <hr />
       <button onClick={() => setNo(no + 1)}>버튼 : {no}</button>
+      <hr />
+      <MemoisedPrimeNosCount max={no} />
     </>
   );
 }
