@@ -22,6 +22,7 @@ function Order() {
   };
 
   const btnAllChecked = optionCheckeds.every((el) => el);
+  const selectedCount = optionCheckeds.filter((el) => el).length;
 
   const toggleAllChecked = () => {
     if (btnAllChecked) {
@@ -38,7 +39,9 @@ function Order() {
   return (
     <>
       <h1>음식 주문</h1>
-      <h2>옵션</h2>
+      <h2>
+        옵션 ({selectedCount} / {options.length})
+      </h2>
       <span
         onClick={toggleAllChecked}
         style={{ userSelect: "none", cursor: "pointer" }}
