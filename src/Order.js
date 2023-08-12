@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 function Order() {
+  const [mainFoodCount, setMainFoodCount] = useState(1);
+
   const options = [
     "콜라 1.5",
     "머스타드 소스",
@@ -21,8 +23,14 @@ function Order() {
     setOptionCheckeds(newOptionCheckeds);
   };
 
-  const btnAllChecked = optionCheckeds.every((el) => el);
-  const selectedCount = optionCheckeds.filter((el) => el).length;
+  const btnAllChecked = useMemo(
+    () => optionCheckeds.every((el) => el),
+    [optionCheckeds]
+  );
+  const selectedCount = useMemo(
+    () => optionCheckeds.filter((el) => el).length,
+    [optionCheckeds]
+  );
 
   const toggleAllChecked = () => {
     if (btnAllChecked) {
@@ -39,6 +47,19 @@ function Order() {
   return (
     <>
       <h1>음식 주문</h1>
+      <h2>메인 ( 수량 : {mainFoodCount} )</h2>
+      <div>
+        <button onClick={() => setMainFoodCount(mainFoodCount + 1)}>
+          증가
+        </button>
+        <button
+          onClick={() =>
+            setMainFoodCount(mainFoodCount == 1 ? 1 : mainFoodCount - 1)
+          }
+        >
+          감소
+        </button>
+      </div>
       <h2>
         옵션 ({selectedCount} / {options.length})
       </h2>
