@@ -58,14 +58,14 @@ function OrderOptions({
 function Order() {
   const [mainFoodCount, setMainFoodCount] = useState(1);
 
-  const options = [
+  const options = useMemo(() => [
     "콜라 1.5",
     "머스타드 소스",
     "홀스래디쉬 소스",
     "스윗어니언 소스",
     "마라 소스",
     "칠리 소스",
-  ];
+  ]);
 
   const [optionCheckeds, setOptionCheckeds] = useState(
     new Array(options.length).fill(false)
