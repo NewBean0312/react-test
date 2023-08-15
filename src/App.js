@@ -14,22 +14,20 @@ function App() {
     "그외",
   ];
 
-  const [selectedAgeBand, setSelectedAgeBand] = useState(ageBands[0]);
+  const [selectedAgeBand, setSelectedAgeBand] = useState(ageBands[3]);
 
   return (
     <>
-      {ageBands.map((ageBand) => (
-        <label>
-          <input
-            name="ageBand"
-            type="radio"
-            onChange={() => setSelectedAgeBand(ageBand)}
-            checked={ageBand == selectedAgeBand}
-          />
-          {ageBand}
-        </label>
-      ))}
-      <hr />
+      <select onChange={(e) => setSelectedAgeBand(e.target.value)}>
+        <option selected disabled>
+          - 나이대역 -
+        </option>
+        {ageBands.map((ageBand) => (
+          <option selected={ageBands == selectedAgeBand} value={ageBand}>
+            {ageBand}
+          </option>
+        ))}
+      </select>
       <div>현재 값 : {selectedAgeBand}</div>
     </>
   );
