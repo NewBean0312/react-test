@@ -3,45 +3,34 @@ import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const fruits = ["사과", "배", "바나나"];
+  const ageBands = [
+    "영유아/아동",
+    "10대",
+    "20대",
+    "30대",
+    "40대",
+    "50대",
+    "60대",
+    "그외",
+  ];
 
-  const [selecteds, setSelecteds] = useState(
-    new Array(fruits.length).fill(true)
-  );
-
-  const toggleFruitSelected = (index) => {
-    const newSelecteds = selecteds.map((el, _index) =>
-      _index == index ? !el : el
-    );
-    setSelecteds(newSelecteds);
-  };
-
-  const selectedFruits = selecteds
-    .map((el, index) => (el ? fruits[index] : el))
-    .filter((el) => el);
+  const [selectedAgeBand, setSelectedAgeBand] = useState(ageBands[0]);
 
   return (
     <>
-      <ul>
-        {fruits.map((fruit, index) => (
-          <li key={index}>
-            <label>
-              <input
-                checked={selecteds[index]}
-                type="checkbox"
-                onChange={() => toggleFruitSelected(index)}
-              />
-              {fruit}
-            </label>
-          </li>
-        ))}
-      </ul>
+      {ageBands.map((ageBand) => (
+        <label>
+          <input
+            name="ageBand"
+            type="radio"
+            onChange={() => setSelectedAgeBand(ageBand)}
+            checked={ageBand == selectedAgeBand}
+          />
+          {ageBand}
+        </label>
+      ))}
       <hr />
-      <div>
-        선택상태 : {selecteds.join(", ")}
-        <hr />
-        선택된 과일 : {selectedFruits.join(", ")}
-      </div>
+      <div>현재 값 : {selectedAgeBand}</div>
     </>
   );
 }
