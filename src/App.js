@@ -32,7 +32,7 @@ function TodoApp({ addTodo, modifyTodo, removeTodo, todos }) {
   );
 }
 
-function App() {
+function useTodosState() {
   const [todos, setTodos] = useState([]);
   const lastTodoRef = useRef(0);
 
@@ -42,7 +42,7 @@ function App() {
     const newTodo = {
       id,
       content: newContent,
-      regDate: "2023-01-17- 12:12:12",
+      regDate: "2023-01-17 12:12:12",
     };
 
     const newTodos = [...todos, newTodo];
@@ -61,6 +61,17 @@ function App() {
     setTodos(newTodos);
   };
 
+  return {
+    todos,
+    addTodo,
+    removeTodo,
+    modifyTodo,
+  };
+}
+
+function App() {
+  const {addTodo, removeTodo, modifyTodo, todos} = useTodosState();
+  
   return (
     <>
       <TodoApp
