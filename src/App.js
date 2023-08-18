@@ -3,17 +3,16 @@ import React, { useState, useRef } from "react";
 import "./App.css";
 
 function TodoApp({ todosState }) {
-  const { addTodo, modifyTodo, removeTodo, todos } = todosState;
   const onBtnAddTodoClick = () => {
-    addTodo("안녕");
+    todosState.addTodo("안녕");
   };
 
   const onBtnDeleteTodoClick = () => {
-    removeTodo(1);
+    todosState.removeTodo(1);
   };
 
   const onBtnModifyTodoClick = () => {
-    modifyTodo(1, "ㅋㅋㅋ");
+    todosState.modifyTodo(1, "ㅋㅋㅋ");
   };
 
   return (
@@ -23,7 +22,7 @@ function TodoApp({ todosState }) {
       <button onClick={onBtnModifyTodoClick}>수정</button>
       <hr />
       <ul>
-        {todos.map((todo, index) => (
+        {todosState.todos.map((todo, index) => (
           <li key={index}>
             {todo.id} {todo.content} {todo.regDate}
           </li>
