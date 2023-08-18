@@ -2,6 +2,24 @@ import React, { useState, useRef } from "react";
 
 import "./App.css";
 
+function TodoListItem({ todo, index }) {
+  return (
+    <li key={index}>
+      {todo.id} {todo.regDate} {todo.content}
+    </li>
+  );
+}
+
+function TodoList({ todosState }) {
+  return (
+    <ul>
+      {todosState.todos.map((todo, index) => (
+        <TodoListItem key={todo.id} todo={todo} index={index} />
+      ))}
+    </ul>
+  );
+}
+
 function NewTodoForm({ todosState }) {
   const onSubmit = (e) => {
     e.preventDefault();
@@ -43,13 +61,7 @@ function TodoApp({ todosState }) {
     <>
       <NewTodoForm todosState={todosState} />
       <hr />
-      <ul>
-        {todosState.todos.map((todo, index) => (
-          <li key={index}>
-            {todo.id} {todo.regDate} {todo.content}
-          </li>
-        ))}
-      </ul>
+      <TodoList todosState={todosState} />
     </>
   );
 }
