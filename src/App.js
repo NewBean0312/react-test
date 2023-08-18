@@ -4,6 +4,7 @@ import "./App.css";
 
 function TodoListItem({ todosState, todo, index }) {
   const [editMode, setEditMode] = useState(false);
+  const [editedContent, setEditedContent] = useState(todo.content);
   const removeTodo = () => {
     todosState.removeTodo(index);
   };
@@ -35,7 +36,12 @@ function TodoListItem({ todosState, todo, index }) {
       )}
       {editMode && (
         <>
-          <input type="text" placeholder="할 일을 입력해주세요." />
+          <input
+            type="text"
+            placeholder="할 일을 입력해주세요."
+            value={editedContent}
+            onChange={(e) => setEditedContent(e.target.value)}
+          />
           &nbsp;
           <button onClick={commitEdit}>수정완료</button>
           <button onClick={cancelEdit}>수정취소</button>
