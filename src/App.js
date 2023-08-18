@@ -12,6 +12,14 @@ function TodoListItem({ todosState, todo, index }) {
     setEditMode(true);
   };
 
+  const commitEdit = () => {
+    setEditMode(false);
+  };
+
+  const cancelEdit = () => {
+    setEditMode(false);
+  };
+
   return (
     <li>
       {todo.id}
@@ -23,10 +31,17 @@ function TodoListItem({ todosState, todo, index }) {
           {todo.content}
           &nbsp;
           <button onClick={showTodo}>수정</button>
-          <button onClick={removeTodo}>삭제</button>
         </>
       )}
-      {editMode && <>수정모드</>}
+      {editMode && (
+        <>
+          <input type="text" placeholder="할 일을 입력해주세요." />
+          &nbsp;
+          <button onClick={commitEdit}>수정완료</button>
+          <button onClick={cancelEdit}>수정취소</button>
+        </>
+      )}
+      <button onClick={removeTodo}>삭제</button>
     </li>
   );
 }
