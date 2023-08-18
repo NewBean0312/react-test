@@ -2,24 +2,25 @@ import React, { useState, useRef } from "react";
 
 import "./App.css";
 
-function TodoApp({ addTodo, modifyTodo, removeTodo, todos }) {
+function TodoApp({ todosState }) {
+  const { addTodo, modifyTodo, removeTodo, todos } = todosState;
   const onBtnAddTodoClick = () => {
     addTodo("안녕");
-  };
-
-  const onBtnModifyTodoClick = () => {
-    modifyTodo(1, "ㅋㅋㅋ");
   };
 
   const onBtnDeleteTodoClick = () => {
     removeTodo(1);
   };
 
+  const onBtnModifyTodoClick = () => {
+    modifyTodo(1, "ㅋㅋㅋ");
+  };
+
   return (
     <>
       <button onClick={onBtnAddTodoClick}>추가</button>
-      <button onClick={onBtnModifyTodoClick}>수정</button>
       <button onClick={onBtnDeleteTodoClick}>삭제</button>
+      <button onClick={onBtnModifyTodoClick}>수정</button>
       <hr />
       <ul>
         {todos.map((todo, index) => (
@@ -70,16 +71,11 @@ function useTodosState() {
 }
 
 function App() {
-  const {addTodo, removeTodo, modifyTodo, todos} = useTodosState();
-  
+  const todosState = useTodosState();
+
   return (
     <>
-      <TodoApp
-        addTodo={addTodo}
-        modifyTodo={modifyTodo}
-        removeTodo={removeTodo}
-        todos={todos}
-      />
+      <TodoApp todosState={todosState} />
     </>
   );
 }
