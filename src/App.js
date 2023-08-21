@@ -19,6 +19,7 @@ function TodoListItem({ todosState, todo, index }) {
 
   const cancelEdit = () => {
     setEditMode(false);
+    setEditedContent(todo.content);
   };
 
   return (
