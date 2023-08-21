@@ -5,6 +5,8 @@ import "./App.css";
 function TodoListItem({ todosState, todo, index }) {
   const [editMode, setEditMode] = useState(false);
   const [editedContent, setEditedContent] = useState(todo.content);
+  const editedContentInputRef = useRef(null);
+
   const removeTodo = () => {
     todosState.removeTodo(index);
   };
@@ -14,6 +16,14 @@ function TodoListItem({ todosState, todo, index }) {
   };
 
   const commitEdit = () => {
+    if (editedContent.trim().length == 0) {
+      alert("할 일을 입력해주세요.");
+      editedContentInputRef.current.focus();
+      return;
+    }
+
+    todosState.modifyTodo(index, editedContent.trim());
+
     setEditMode(false);
   };
 
