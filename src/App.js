@@ -16,7 +16,7 @@ function useTodosState() {
       regDate: dateToStr(new Date()),
     };
 
-    setTodos((todos) => [...todos, newTodo]);
+    setTodos((todos) => [newTodo, ...todos]);
   };
 
   const modifyTodo = (index, newContent) => {
