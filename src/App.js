@@ -43,7 +43,7 @@ function App() {
   const todosState = useTodosState();
 
   useEffect(() => {
-    todosState.addTodo("운동");
+    todosState.addTodo("운동\n스트레칭\n유산소\n런지\n스쿼트");
     todosState.addTodo("요리");
     todosState.addTodo("공부");
   }, []);
@@ -80,12 +80,17 @@ function App() {
 
       <form onSubmit={onSubmit} className="flex flex-col mt-4 px-4 gap-2">
         <TextField
+          minRows={3}
+          maxRows={10}
+          multiline
           autoComplete="off"
           name="content"
           label="할일을 입력해주세요."
           variant="outlined"
         />
-        <Button variant="contained">추가</Button>
+        <Button type="submit" variant="contained">
+          추가
+        </Button>
       </form>
       <div className="mt-4 px-4">
         <ul>
@@ -95,7 +100,9 @@ function App() {
                 <Chip label={`번호 : ${todo.id}`} variant="outlined" />
                 <Chip label={todo.regDate} variant="outlined" color="primary" />
               </div>
-              <div className="mt-4 p-10 shadow rounded-[20px]">{todo.content}</div>
+              <div className="mt-4 p-10 shadow rounded-[20px] whitespace-pre-wrap leading-normal">
+                {todo.content}
+              </div>
             </li>
           ))}
         </ul>
