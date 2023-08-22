@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { AppBar, Button, TextField, Toolbar, Chip } from "@mui/material";
+import { AppBar, Box, Button, TextField, Toolbar, Chip } from "@mui/material";
 
 import "./App.css";
 
@@ -110,7 +110,13 @@ function App() {
                 />
               </div>
               <div className="mt-4 p-10 shadow rounded-[20px] whitespace-pre-wrap leading-normal">
-                {todo.content}
+                <Box
+                  sx={{
+                    color: "primary.main",
+                  }}
+                >
+                  {todo.content}
+                </Box>
               </div>
             </li>
           ))}
