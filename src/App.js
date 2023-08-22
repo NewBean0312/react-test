@@ -1,14 +1,18 @@
 import React, { useState, useRef } from "react";
-import { Button } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 
 import "./App.css";
 
 function App() {
   return (
     <>
-      <Button variant="contained" size="large">
-        Large
-      </Button>
+      <AppBar position="fixed">
+        <Toolbar>
+          <div className="flex-1"></div>
+          <div className="font-bold">NOTEPAD</div>
+          <div className="flex-1"></div>
+        </Toolbar>
+      </AppBar>
     </>
   );
 }
