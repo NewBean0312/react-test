@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { AppBar, Button, TextField, Toolbar } from "@mui/material";
 
 import "./App.css";
@@ -16,8 +16,7 @@ function useTodosState() {
       regDate: dateToStr(new Date()),
     };
 
-    const newTodos = [...todos, newTodo];
-    setTodos(newTodos);
+    setTodos((todos) => [...todos, newTodo]);
   };
 
   const modifyTodo = (index, newContent) => {
@@ -42,6 +41,12 @@ function useTodosState() {
 
 function App() {
   const todosState = useTodosState();
+
+  useEffect(() => {
+    todosState.addTodo("운동");
+    todosState.addTodo("요리");
+    todosState.addTodo("공부");
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
