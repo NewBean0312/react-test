@@ -139,13 +139,16 @@ function App({ theme }) {
               <div className="flex shadow mt-4 rounded-[20px]">
                 <Button className="bg-red-500 w-[130px] flex-shrink-0 !items-start !rounded-[20px_0_0_20px]">
                   <span
-                    className={classNames("text-3xl", {
-                      "text-[color:var(--mui-color-primary-main)]":
-                        index % 2 == 0,
-                    },{
-                      "text-[color:#b0b0b0]":
-                        index % 2 != 0,
-                    })}
+                    className={classNames(
+                      "text-3xl",
+                      {
+                        "text-[color:var(--mui-color-primary-main)]":
+                          index % 2 == 0,
+                      },
+                      {
+                        "text-[color:#b0b0b0]": index % 2 != 0,
+                      }
+                    )}
                   >
                     <i class="fa-solid fa-check"></i>
                   </span>
@@ -153,7 +156,14 @@ function App({ theme }) {
                 <div className="bg-blue-500 whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)] flex-grow">
                   {todo.content}
                 </div>
-                <div className="bg-red-300 w-[130px] flex-shrink-0">후</div>
+                <Button
+                  className="bg-red-300 w-[130px] flex-shrink-0"
+                  color="inherit"
+                >
+                  <span className="text-xl text-[#b0b0b0]">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </span>
+                </Button>
               </div>
             </li>
           ))}
