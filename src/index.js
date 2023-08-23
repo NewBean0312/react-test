@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App";
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
 
+
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = createTheme({
   typography: {
@@ -11,14 +13,15 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#8559ff",
+      main: "#4a4a4a",
       contrastText: "#ffffff",
     },
   },
 });
+
 root.render(
   <ThemeProvider theme={theme}>
     <CssBaseline />
-    <App />
+    <App theme={theme}/>
   </ThemeProvider>
 );
