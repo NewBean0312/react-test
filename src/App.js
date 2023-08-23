@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { AppBar, Box, Button, TextField, Toolbar, Chip } from "@mui/material";
-
-import "./App.css";
+import classNames from "classnames";
 
 function useTodosState() {
   const [todos, setTodos] = useState([]);
@@ -122,7 +121,7 @@ function App({ theme }) {
       </form>
       <div className="mt-4 px-4">
         <ul>
-          {todosState.todos.map((todo) => (
+          {todosState.todos.map((todo, index) => (
             <li key={todo.id} className="mt-10">
               <div className="flex gap-2">
                 <Chip
@@ -139,7 +138,17 @@ function App({ theme }) {
               </div>
               <div className="flex shadow mt-4 rounded-[20px]">
                 <Button className="bg-red-500 w-[130px] flex-shrink-0 !items-start !rounded-[20px_0_0_20px]">
-                  <span>체크박스</span>
+                  <span
+                    className={classNames("text-3xl", {
+                      "text-[color:var(--mui-color-primary-main)]":
+                        index % 2 == 0,
+                    },{
+                      "text-[color:#b0b0b0]":
+                        index % 2 != 0,
+                    })}
+                  >
+                    <i class="fa-solid fa-check"></i>
+                  </span>
                 </Button>
                 <div className="bg-blue-500 whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)] flex-grow">
                   {todo.content}
