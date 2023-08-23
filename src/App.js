@@ -1,5 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import { AppBar, Box, Button, TextField, Toolbar, Chip } from "@mui/material";
+import {
+  AppBar,
+  Button,
+  Drawer,
+  TextField,
+  Toolbar,
+  Chip,
+} from "@mui/material";
 import classNames from "classnames";
 
 function useTodosState() {
@@ -119,6 +126,9 @@ function App({ theme }) {
           추가
         </Button>
       </form>
+      <Drawer anchor={"bottom"} open={true} onClose={() => {}}>
+        <div className="p-10">옵션 드로어</div>
+      </Drawer>
       <div className="mt-4 px-4">
         <ul>
           {todosState.todos.map((todo, index) => (
