@@ -155,10 +155,18 @@ function App({ theme }) {
                     <i class="fa-solid fa-check"></i>
                   </span>
                 </Button>
-                <div className="whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)] flex-grow my-5 flex items-center">
+                <div className="flex-shrink-0 w-[2px] bg-[#b0b0b0] my-5 mr-6"></div>
+                <div
+                  className="whitespace-pre-wrap leading-relaxed
+                  hover:text-[color:var(--mui-color-primary-main)] 
+                  flex-grow my-5 flex items-center"
+                >
                   {todo.content}
                 </div>
-                <Button className="w-[130px] flex-shrink-0 !items-start !rounded-[0__20px_20px_0]" color="inherit" >
+                <Button
+                  className="w-[130px] flex-shrink-0 !items-start !rounded-[0__20px_20px_0]"
+                  color="inherit"
+                >
                   <span className="text-xl text-[#b0b0b0] flex items-center h-[50px]">
                     <i class="fa-solid fa-ellipsis-vertical"></i>
                   </span>
