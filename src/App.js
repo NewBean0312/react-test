@@ -141,6 +141,8 @@ function App({ theme }) {
                   <span
                     className={classNames(
                       "text-3xl",
+                      "flex items-center",
+                      "h-[50px]",
                       {
                         "text-[color:var(--mui-color-primary-main)]":
                           index % 2 == 0,
@@ -153,12 +155,12 @@ function App({ theme }) {
                     <i class="fa-solid fa-check"></i>
                   </span>
                 </Button>
-                <div className="whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)] flex-grow">
+                <div className="bg-blue-500 whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)] flex-grow">
                   {todo.content}
                 </div>
-                <Button className="w-[130px] flex-shrink-0 !rounded-[0__20px_20px_0]" color="inherit" >
-                  <span className="text-xl text-[#b0b0b0]">
-                    <i class="fa-solid fa-ellipsis"></i>
+                <Button className="w-[130px] flex-shrink-0 !items-start !rounded-[0__20px_20px_0]" color="inherit" >
+                  <span className="text-xl text-[#b0b0b0] flex items-center h-[50px]">
+                    <i class="fa-solid fa-ellipsis-vertical"></i>
                   </span>
                 </Button>
               </div>
