@@ -4,8 +4,6 @@ import "./index.css";
 import App from "./App";
 import { ThemeProvider, CssBaseline, createTheme } from "@mui/material";
 
-
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = createTheme({
   typography: {
