@@ -137,7 +137,7 @@ function App({ theme }) {
                 />
               </div>
               <div className="flex shadow mt-4 rounded-[20px]">
-                <Button className="bg-red-500 w-[130px] flex-shrink-0 !items-start !rounded-[20px_0_0_20px]">
+                <Button className="w-[130px] flex-shrink-0 !items-start !rounded-[20px_0_0_20px]">
                   <span
                     className={classNames(
                       "text-3xl",
@@ -153,13 +153,10 @@ function App({ theme }) {
                     <i class="fa-solid fa-check"></i>
                   </span>
                 </Button>
-                <div className="bg-blue-500 whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)] flex-grow">
+                <div className="whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)] flex-grow">
                   {todo.content}
                 </div>
-                <Button
-                  className="bg-red-300 w-[130px] flex-shrink-0"
-                  color="inherit"
-                >
+                <Button className="w-[130px] flex-shrink-0 !rounded-[0__20px_20px_0]" color="inherit" >
                   <span className="text-xl text-[#b0b0b0]">
                     <i class="fa-solid fa-ellipsis"></i>
                   </span>
