@@ -77,7 +77,7 @@ function NewTodoForm({ todosState }) {
     form.content.value = form.content.value.trim();
 
     if (form.content.value.length == 0) {
-      alert("할일을 입력해주세요.");
+      alert("할  일을 입력해주세요.");
       form.content.focus();
 
       return;
@@ -97,7 +97,7 @@ function NewTodoForm({ todosState }) {
           multiline
           autoComplete="off"
           name="content"
-          label="할일을 입력해주세요."
+          label="할 일을 입력해주세요."
           variant="outlined"
         />
         <Button type="submit" variant="contained">
@@ -180,27 +180,70 @@ function useTodoOptionDrawerState() {
   };
 }
 
+function EditTodoModal({ state }) {
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+
+    form.content.value = form.content.value.trim();
+
+    if (form.content.value.length == 0) {
+      alert("할 일을 입력해주세요.");
+      form.content.focus();
+      return;
+    }
+  };
+
+  return (
+    <>
+      <Modal
+        open={state.opened}
+        onClose={state.close}
+        className="flex justify-center items-center"
+      >
+        <div className="bg-white p-10 !rounded-[10px]">
+          <form onSubmit={onSubmit} className="flex flex-col mt-4 px-4 gap-2">
+            <TextField
+              minRows={3}
+              maxRows={10}
+              multiline
+              autoComplete="off"
+              name="content"
+              label="할 일을 입력해주세요."
+              variant="outlined"
+            />
+            <Button type="submit" variant="contained">
+              수정
+            </Button>
+          </form>
+        </div>
+      </Modal>
+    </>
+  );
+}
+
 function useEditTodoModalState() {
   const [opened, setOpened] = useState(false);
 
   const open = () => {
     setOpened(true);
-  }
+  };
 
   const close = () => {
     setOpened(false);
-  }
+  };
 
   return {
     opened,
     open,
     close,
-  }
+  };
 }
 
 function TodoOptionDrawer({ state, todosState }) {
   const editTodoModalState = useEditTodoModalState();
-  
+
   const removeTodo = () => {
     todosState.removeTodoById(state.todoId);
     state.close();
@@ -208,6 +251,7 @@ function TodoOptionDrawer({ state, todosState }) {
 
   return (
     <>
+      <EditTodoModal state={editTodoModalState} />
       <SwipeableDrawer
         anchor={"bottom"}
         onOpen={() => {}}
@@ -237,13 +281,6 @@ function TodoOptionDrawer({ state, todosState }) {
           </ListItemButton>
         </List>
       </SwipeableDrawer>
-      <Modal
-        open={editTodoModalState.opened}
-        onClose={editTodoModalState.close}
-        className="flex justify-center items-center"
-      >
-        <div className="bg-white p-10 !rounded-[10px]">안녕하세요</div>
-      </Modal>
     </>
   );
 }
