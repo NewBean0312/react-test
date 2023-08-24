@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import {
   AppBar,
   Button,
-  Drawer,
+  SwipeableDrawer,
   TextField,
   Toolbar,
   Chip,
@@ -130,7 +130,7 @@ function TodoListItem({ todo, index, openDrawer }) {
                 }
               )}
             >
-              <i class="fa-solid fa-check"></i>
+              <i className="fa-solid fa-check"></i>
             </span>
           </Button>
           <div className="flex-shrink-0 w-[2px] bg-[#b0b0b0] my-5 mr-6"></div>
@@ -147,7 +147,7 @@ function TodoListItem({ todo, index, openDrawer }) {
             color="inherit"
           >
             <span className="text-xl text-[#b0b0b0] flex items-center h-[50px]">
-              <i class="fa-solid fa-ellipsis-vertical"></i>
+              <i className="fa-solid fa-ellipsis"></i>
             </span>
           </Button>
         </div>
@@ -173,13 +173,14 @@ function useTodoOptionDrawerState() {
 function TodoOptionDrawer({ state }) {
   return (
     <>
-      <Drawer
+      <SwipeableDrawer
         anchor={"bottom"}
+        onOpen={() => {}}
         open={state.opened}
         onClose={state.close}
       >
         <div className="p-10">{state.todoId}번 옵션 드로어</div>
-      </Drawer>
+      </SwipeableDrawer>
     </>
   );
 }
