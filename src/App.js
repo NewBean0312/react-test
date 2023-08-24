@@ -2,6 +2,9 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import {
   AppBar,
   Button,
+  List,
+  ListItem,
+  ListItemButton,
   SwipeableDrawer,
   TextField,
   Toolbar,
@@ -179,7 +182,14 @@ function TodoOptionDrawer({ state }) {
         open={state.opened}
         onClose={state.close}
       >
-        <div className="p-10">{state.todoId}번 옵션 드로어</div>
+        <List className="!py-0">
+          <ListItem className="!pt-5 !p-5">
+            <span className="text-red-500 !pr-2">{state.todoId}번</span> 옵션
+            드로어
+          </ListItem>
+          <ListItemButton className="!pt-5 !p-5">수정</ListItemButton>
+          <ListItemButton className="!pt-5 !p-5">삭제</ListItemButton>
+        </List>
       </SwipeableDrawer>
     </>
   );
