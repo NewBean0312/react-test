@@ -180,17 +180,27 @@ function useTodoOptionDrawerState() {
   };
 }
 
+function useEditTodoModalState() {
+  const [opened, setOpened] = useState(false);
+
+  const open = () => {
+    setOpened(true);
+  }
+
+  const close = () => {
+    setOpened(false);
+  }
+
+  return {
+    opened,
+    open,
+    close,
+  }
+}
+
 function TodoOptionDrawer({ state, todosState }) {
-  const [editTodoModalOpened, setEditTodoModalOpened] = useState(false);
-
-  const openEditTodoModal = () => {
-    setEditTodoModalOpened(true);
-  };
-
-  const closeEditTodoModal = () => {
-    setEditTodoModalOpened(false);
-  };
-
+  const editTodoModalState = useEditTodoModalState();
+  
   const removeTodo = () => {
     todosState.removeTodoById(state.todoId);
     state.close();
@@ -211,7 +221,7 @@ function TodoOptionDrawer({ state, todosState }) {
           </ListItem>
           <ListItemButton
             className="!pt-5 !p-5 !items-baseline"
-            onClick={openEditTodoModal}
+            onClick={editTodoModalState.open}
           >
             <i className="fa-solid fa-pen-to-square"></i>
             &nbsp;
@@ -228,8 +238,8 @@ function TodoOptionDrawer({ state, todosState }) {
         </List>
       </SwipeableDrawer>
       <Modal
-        open={editTodoModalOpened}
-        onClose={closeEditTodoModal}
+        open={editTodoModalState.opened}
+        onClose={editTodoModalState.close}
         className="flex justify-center items-center"
       >
         <div className="bg-white p-10 !rounded-[10px]">안녕하세요</div>
