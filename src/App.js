@@ -170,18 +170,26 @@ function useTodoOptionDrawerState() {
   };
 }
 
+function TodoOptionDrawer({ state }) {
+  return (
+    <>
+      <Drawer
+        anchor={"bottom"}
+        open={state.opened}
+        onClose={state.close}
+      >
+        <div className="p-10">{state.todoId}번 옵션 드로어</div>
+      </Drawer>
+    </>
+  );
+}
+
 function TodoList({ todosState }) {
   const todoOptionDrawerState = useTodoOptionDrawerState();
 
   return (
     <>
-      <Drawer
-        anchor={"bottom"}
-        open={todoOptionDrawerState.opened}
-        onClose={todoOptionDrawerState.close}
-      >
-        <div className="p-10">{todoOptionDrawerState.todoId}번 옵션 드로어</div>
-      </Drawer>
+      <TodoOptionDrawer state={todoOptionDrawerState} />
       <div className="mt-4 px-4">
         <ul>
           {todosState.todos.map((todo, index) => (
