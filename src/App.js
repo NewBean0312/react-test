@@ -7,11 +7,17 @@ import {
   ListItem,
   ListItemButton,
   Modal,
+  Snackbar,
+  Alert as MuiAlert,
   SwipeableDrawer,
   TextField,
   Toolbar,
 } from "@mui/material";
 import classNames from "classnames";
+
+const Alert = React.forwardRef((props, ref) => {
+  return <MuiAlert {...props} ref={ref} variant="filled" />;
+});
 
 function useTodosState() {
   const [todos, setTodos] = useState([]);
@@ -379,9 +385,18 @@ function App({ theme }) {
     });
   }, []);
 
+  const [open, setOpen] = useState(false);
+
   return (
     <>
-      <AppBar position="static">
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert severity="success">게시물이 삭제되었습니다.</Alert>
+      </Snackbar>
+      <AppBar position="static" onClick={() => setOpen(true)}>
         <Toolbar>
           <div className="flex-1"></div>
           <div className="font-bold">HAPPY NOTE</div>
