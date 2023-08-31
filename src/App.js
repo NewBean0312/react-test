@@ -41,9 +41,33 @@ function useTodosState() {
     setTodos(newTodos);
   };
 
+  const modifyTodoById = (id, newContent) => {
+    const index = findTodoIndexById(id);
+
+    if (index == -1) {
+      return;
+    }
+
+    modifyTodo(index, newContent);
+  };
+
   const removeTodoById = (id) => {
-    const index = todos.findIndex((todo) => todo.id == id);
+    const index = findTodoIndexById(id);
     return removeTodo(index);
+  };
+
+  const findTodoIndexById = (id) => {
+    return todos.findIndex((todo) => todo.id == id);
+  };
+
+  const findTodoById = (id) => {
+    const index = findTodoIndexById(id);
+
+    if (index == -1) {
+      return null;
+    }
+
+    return todos[index];
   };
 
   return {
@@ -52,6 +76,8 @@ function useTodosState() {
     modifyTodo,
     removeTodo,
     removeTodoById,
+    findTodoById,
+    modifyTodoById,
   };
 }
 
@@ -180,7 +206,7 @@ function useTodoOptionDrawerState() {
   };
 }
 
-function EditTodoModal({ state }) {
+function EditTodoModal({ state, todo, todosState }) {
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -193,6 +219,9 @@ function EditTodoModal({ state }) {
       form.content.focus();
       return;
     }
+
+    todosState.modifyTodoById(todo.id, form.content.value);
+    state.close();
   };
 
   return (
@@ -212,6 +241,7 @@ function EditTodoModal({ state }) {
               name="content"
               label="할 일을 입력해주세요."
               variant="outlined"
+              defaultValue={todo?.content}
             />
             <Button type="submit" variant="contained">
               수정
@@ -249,9 +279,15 @@ function TodoOptionDrawer({ state, todosState }) {
     state.close();
   };
 
+  const todo = todosState.findTodoById(state.todoId);
+
   return (
     <>
-      <EditTodoModal state={editTodoModalState} />
+      <EditTodoModal
+        state={editTodoModalState}
+        todo={todo}
+        todosState={todosState}
+      />
       <SwipeableDrawer
         anchor={"bottom"}
         onOpen={() => {}}
