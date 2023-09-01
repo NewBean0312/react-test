@@ -33,6 +33,8 @@ function useTodosState() {
     };
 
     setTodos((todos) => [newTodo, ...todos]);
+
+    return id;
   };
 
   const modifyTodo = (index, newContent) => {
@@ -100,7 +102,7 @@ const muiThemePaletteKeys = [
   "warning",
 ];
 
-function NewTodoForm({ todosState }) {
+function NewTodoForm({ todosState, noticeSnackbarState }) {
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -115,9 +117,10 @@ function NewTodoForm({ todosState }) {
       return;
     }
 
-    todosState.addTodo(form.content.value);
+    const newTodoId = todosState.addTodo(form.content.value);
     form.content.value = "";
     form.content.focus();
+    noticeSnackbarState.open(`${newTodoId}번 할 일이 추가되었습니다.`);
   };
 
   return (
@@ -212,7 +215,13 @@ function useTodoOptionDrawerState() {
   };
 }
 
-function EditTodoModal({ state, todo, todosState, closeDrawer }) {
+function EditTodoModal({
+  state,
+  todo,
+  todosState,
+  closeDrawer,
+  noticeSnackbarState,
+}) {
   const close = () => {
     state.close();
     closeDrawer();
@@ -233,6 +242,7 @@ function EditTodoModal({ state, todo, todosState, closeDrawer }) {
 
     todosState.modifyTodoById(todo.id, form.content.value);
     close();
+    noticeSnackbarState.open(`${todo.id}번 할 일이 수정되었습니다.`, "info");
   };
 
   return (
@@ -282,7 +292,7 @@ function useEditTodoModalState() {
   };
 }
 
-function TodoOptionDrawer({ state, todosState }) {
+function TodoOptionDrawer({ state, todosState, noticeSnackbarState }) {
   const editTodoModalState = useEditTodoModalState();
 
   const removeTodo = () => {
@@ -293,6 +303,7 @@ function TodoOptionDrawer({ state, todosState }) {
 
     todosState.removeTodoById(state.todoId);
     state.close();
+    noticeSnackbarState.open(`${todo.id}번 할 일이 삭제되었습니다.`, "info");
   };
 
   const todo = todosState.findTodoById(state.todoId);
@@ -300,6 +311,7 @@ function TodoOptionDrawer({ state, todosState }) {
   return (
     <>
       <EditTodoModal
+        noticeSnackbarState={noticeSnackbarState}
         state={editTodoModalState}
         todo={todo}
         todosState={todosState}
@@ -338,16 +350,21 @@ function TodoOptionDrawer({ state, todosState }) {
   );
 }
 
-function TodoList({ todosState }) {
+function TodoList({ todosState, noticeSnackbarState }) {
   const todoOptionDrawerState = useTodoOptionDrawerState();
 
   return (
     <>
-      <TodoOptionDrawer state={todoOptionDrawerState} todosState={todosState} />
+      <TodoOptionDrawer
+        state={todoOptionDrawerState}
+        todosState={todosState}
+        noticeSnackbarState={noticeSnackbarState}
+      />
       <div className="mt-4 px-4">
         <ul>
           {todosState.todos.map((todo, index) => (
             <TodoListItem
+              noticeSnackbarState={noticeSnackbarState}
               key={todo.id}
               todo={todo}
               index={index}
@@ -429,10 +446,7 @@ function App({ theme }) {
 
   return (
     <>
-      <AppBar
-        position="static"
-        onClick={() => noticeSnackbarState.open("안녕")}
-      >
+      <AppBar position="static">
         <Toolbar>
           <div className="flex-1"></div>
           <div className="font-bold">HAPPY NOTE</div>
@@ -440,8 +454,14 @@ function App({ theme }) {
         </Toolbar>
       </AppBar>
       <NoticeSnackbar state={noticeSnackbarState} />
-      <NewTodoForm todosState={todosState} />
-      <TodoList todosState={todosState} />
+      <NewTodoForm
+        todosState={todosState}
+        noticeSnackbarState={noticeSnackbarState}
+      />
+      <TodoList
+        todosState={todosState}
+        noticeSnackbarState={noticeSnackbarState}
+      />
     </>
   );
 }
