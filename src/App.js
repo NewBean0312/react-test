@@ -15,16 +15,21 @@ import {
 } from "@mui/material";
 import classNames from "classnames";
 import { atom, useRecoilState } from "recoil";
-import RecoilEx from "./RecoilEx"
+import RecoilEx from "./RecoilEx";
+
+import { recoilPersist } from "recoil-persist";
+const { persistAtom } = recoilPersist();
 
 const todosAtom = atom({
   key: "app/todosAtom",
   default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 const lastTodoIdAtom = atom({
   key: "app/lastTodoIdAtom",
   default: 0,
+  effects_UNSTABLE: [persistAtom],
 });
 
 const Alert = React.forwardRef((props, ref) => {
@@ -436,11 +441,7 @@ function App({ theme }) {
   const todosStatus = useTodosStatus();
   const noticeSnackbarStatus = useNoticeSnackbarStatus();
 
-  useEffect(() => {
-    todosStatus.addTodo("운동\n스트레칭\n유산소\n런지\n스쿼트");
-    todosStatus.addTodo("요리");
-    todosStatus.addTodo("공부");
-  }, []);
+  useEffect(() => {}, []);
 
   useEffect(() => {
     const r = document.querySelector(":root");
@@ -459,7 +460,7 @@ function App({ theme }) {
 
   return (
     <>
-      {/* <AppBar position="static">
+      <AppBar position="static">
         <Toolbar>
           <div className="flex-1"></div>
           <div className="font-bold">HAPPY NOTE</div>
@@ -468,8 +469,8 @@ function App({ theme }) {
       </AppBar>
       <NoticeSnackbar status={noticeSnackbarStatus} />
       <NewTodoForm noticeSnackbarStatus={noticeSnackbarStatus} />
-      <TodoList noticeSnackbarStatus={noticeSnackbarStatus} /> */}
-      <RecoilEx />
+      <TodoList noticeSnackbarStatus={noticeSnackbarStatus} />
+      {/* <RecoilEx /> */}
     </>
   );
 }
