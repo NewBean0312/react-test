@@ -309,7 +309,8 @@ function useEditTodoModalStatus() {
   };
 }
 
-function TodoOptionDrawer({ status, todosStatus, noticeSnackbarStatus }) {
+function TodoOptionDrawer({ status, noticeSnackbarStatus }) {
+  const todosStatus = useTodosStatus();
   const editTodoModalStatus = useEditTodoModalStatus();
 
   const removeTodo = () => {
@@ -367,14 +368,14 @@ function TodoOptionDrawer({ status, todosStatus, noticeSnackbarStatus }) {
   );
 }
 
-function TodoList({ todosStatus, noticeSnackbarStatus }) {
+function TodoList({ noticeSnackbarStatus }) {
+  const todosStatus = useTodosStatus();
   const todoOptionDrawerStatus = useTodoOptionDrawerStatus();
 
   return (
     <>
       <TodoOptionDrawer
         status={todoOptionDrawerStatus}
-        todosStatus={todosStatus}
         noticeSnackbarStatus={noticeSnackbarStatus}
       />
       <div className="mt-4 px-4">
@@ -471,13 +472,8 @@ function App({ theme }) {
         </Toolbar>
       </AppBar>
       <NoticeSnackbar status={noticeSnackbarStatus} />
-      <NewTodoForm
-        noticeSnackbarStatus={noticeSnackbarStatus}
-      />
-      <TodoList
-        todosStatus={todosStatus}
-        noticeSnackbarStatus={noticeSnackbarStatus}
-      />
+      <NewTodoForm noticeSnackbarStatus={noticeSnackbarStatus} />
+      <TodoList noticeSnackbarStatus={noticeSnackbarStatus} />
     </>
   );
 }
