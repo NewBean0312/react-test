@@ -2,54 +2,56 @@ import React, { useState } from "react";
 import { Button } from "@mui/material";
 import {
   atom,
+  atomFamily,
   useRecoilState,
   useRecoilValue,
   useSetRecoilState,
 } from "recoil";
 
-const page1NoAtom = atom({
-  key: "RecoilEx/page1NoAtom",
+const pageCountAtom = atom({
+  key: "RecoilEx/pageCountAtom",
   default: 0,
 });
 
-const page2NoAtom = atom({
-  key: "RecoilEx/page2NoAtom",
-  default: 0,
-});
+function usePageCount() {
+  const [count, setCount] = useRecoilState(pageCountAtom);
 
-const page3NoAtom = atom({
-  key: "RecoilEx/page3NoAtom",
-  default: 0,
-});
+  const increaseOne = () => setCount(count + 1);
+  const decreaseOne = () => setCount(count - 1);
+  const increaseTen = () => setCount(count + 10);
+  const decreaseTen = () => setCount(count - 10);
+  const clear = () => setCount(0);
 
-const page4NoAtom = atom({
-  key: "RecoilEx/page4NoAtom",
-  default: 0,
-});
+  return {
+    count,
+    increaseOne,
+    decreaseOne,
+    increaseTen,
+    decreaseTen,
+    clear,
+  }
+}
 
 function Page1() {
-  const [no, setNo] = useRecoilState(page1NoAtom);
-  const setPage2No = useSetRecoilState(page2NoAtom);
-  const onClick = () => setPage2No(0);
+  const pageCountState = usePageCount();
 
   return (
     <>
       <h1>페이지 1</h1>
-      <div>
-        <Button onClick={onClick} variant="outlined">
-          페이지 2의 값을 초기화
-        </Button>
-      </div>
       <ul>
-        <li>페이지 1의 숫자 {no}</li>
+        <li>페이지 1의 숫자 {pageCountState.count}</li>
         <li>
-          <Button onClick={() => setNo(no + 10)} variant="outlined">
-            페이지 1 10 증가
+          <Button onClick={pageCountState.increaseOne} variant="outlined">
+            1 증가
           </Button>
-        </li>
-        <li>
-          <Button onClick={() => setNo(no - 10)} variant="outlined">
-            페이지 1 10 감소
+          <Button onClick={pageCountState.decreaseOne} variant="outlined">
+            1 감소
+          </Button>
+          <Button onClick={pageCountState.increaseTen} variant="outlined">
+            10 증가
+          </Button>
+          <Button onClick={pageCountState.decreaseTen} variant="outlined">
+            10 감소
           </Button>
         </li>
       </ul>
@@ -58,23 +60,25 @@ function Page1() {
 }
 
 function Page2() {
-  const [no, setNo] = useRecoilState(page2NoAtom);
-  const page1No = useRecoilValue(page1NoAtom);
+  const pageCountState = usePageCount();
 
   return (
     <>
       <h1>페이지 2</h1>
-      <div>페이지 1의 숫자 : {page1No}</div>
       <ul>
-        <li>페이지 2의 숫자 {no}</li>
+        <li>페이지 2의 숫자 {pageCountState.count}</li>
         <li>
-          <Button onClick={() => setNo(no + 10)} variant="outlined">
-            페이지 2 10 증가
+          <Button onClick={pageCountState.increaseOne} variant="outlined">
+            1 증가
           </Button>
-        </li>
-        <li>
-          <Button onClick={() => setNo(no - 10)} variant="outlined">
-            페이지 2 10 감소
+          <Button onClick={pageCountState.decreaseOne} variant="outlined">
+            1 감소
+          </Button>
+          <Button onClick={pageCountState.increaseTen} variant="outlined">
+            10 증가
+          </Button>
+          <Button onClick={pageCountState.decreaseTen} variant="outlined">
+            10 감소
           </Button>
         </li>
       </ul>
@@ -83,16 +87,25 @@ function Page2() {
 }
 
 function Page3() {
-  const [no, setNo] = useRecoilState(page3NoAtom);
+  const pageCountState = usePageCount();
 
   return (
     <>
       <h1>페이지 3</h1>
       <ul>
-        <li>페이지 3의 숫자 {no}</li>
+        <li>페이지 3의 숫자 {pageCountState.count}</li>
         <li>
-          <Button onClick={() => setNo(no + 10)} variant="outlined">
-            페이지 3 10 증가
+          <Button onClick={pageCountState.increaseOne} variant="outlined">
+            1 증가
+          </Button>
+          <Button onClick={pageCountState.decreaseOne} variant="outlined">
+            1 감소
+          </Button>
+          <Button onClick={pageCountState.increaseTen} variant="outlined">
+            10 증가
+          </Button>
+          <Button onClick={pageCountState.decreaseTen} variant="outlined">
+            10 감소
           </Button>
         </li>
       </ul>
@@ -101,22 +114,33 @@ function Page3() {
 }
 
 function Page4() {
-  const [no, setNo] = useRecoilState(page4NoAtom);
+  const pageCountState = usePageCount();
 
   return (
     <>
       <h1>페이지 4</h1>
       <ul>
-        <li>페이지 4의 숫자 {no}</li>
+        <li>페이지 4의 숫자 {pageCountState.count}</li>
         <li>
-          <Button onClick={() => setNo(no + 10)} variant="outlined">
-            페이지 4 10 증가
+          <Button onClick={pageCountState.increaseOne} variant="outlined">
+            1 증가
+          </Button>
+          <Button onClick={pageCountState.decreaseOne} variant="outlined">
+            1 감소
+          </Button>
+          <Button onClick={pageCountState.increaseTen} variant="outlined">
+            10 증가
+          </Button>
+          <Button onClick={pageCountState.decreaseTen} variant="outlined">
+            10 감소
           </Button>
         </li>
       </ul>
     </>
   );
 }
+
+
 
 function RecoilEx() {
   const [pageNo, setPageNo] = useState("page1");
