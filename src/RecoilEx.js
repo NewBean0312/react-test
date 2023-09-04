@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
-import { atom, useRecoilState } from "recoil";
+import {
+  atom,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 
 const page1NoAtom = atom({
   key: "RecoilEx/page1NoAtom",
@@ -14,10 +19,17 @@ const page2NoAtom = atom({
 
 function Page1() {
   const [no, setNo] = useRecoilState(page1NoAtom);
+  const setPage2No = useSetRecoilState(page2NoAtom);
+  const onClick = () => setPage2No(0);
 
   return (
     <>
       <h1>페이지 1</h1>
+      <div>
+        <Button onClick={onClick} variant="outlined">
+          페이지 2의 값을 초기화
+        </Button>
+      </div>
       <ul>
         <li>페이지 1의 숫자 {no}</li>
         <li>
@@ -37,10 +49,12 @@ function Page1() {
 
 function Page2() {
   const [no, setNo] = useRecoilState(page2NoAtom);
+  const page1No = useRecoilValue(page1NoAtom);
 
   return (
     <>
       <h1>페이지 2</h1>
+      <div>페이지 1의 숫자 : {page1No}</div>
       <ul>
         <li>페이지 2의 숫자 {no}</li>
         <li>
