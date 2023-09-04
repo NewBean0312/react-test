@@ -35,6 +35,8 @@ function useTodosStatus() {
   const [lastTodoId, setLastTodoId] = useRecoilState(lastTodoIdAtom);
   const lastTodoIdRef = useRef(lastTodoId);
 
+  lastTodoIdRef.current = lastTodoId;
+
   const addTodo = (newContent) => {
     const id = ++lastTodoIdRef.current;
     setLastTodoId(id);
@@ -115,7 +117,9 @@ const muiThemePaletteKeys = [
   "warning",
 ];
 
-function NewTodoForm({ todosStatus, noticeSnackbarStatus }) {
+function NewTodoForm({ noticeSnackbarStatus }) {
+  const todosStatus = useTodosStatus();
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -468,7 +472,6 @@ function App({ theme }) {
       </AppBar>
       <NoticeSnackbar status={noticeSnackbarStatus} />
       <NewTodoForm
-        todosStatus={todosStatus}
         noticeSnackbarStatus={noticeSnackbarStatus}
       />
       <TodoList
