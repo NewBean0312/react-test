@@ -232,13 +232,9 @@ function useTodoOptionDrawerStatus() {
   };
 }
 
-function EditTodoModal({
-  status,
-  todo,
-  todosStatus,
-  closeDrawer,
-  noticeSnackbarStatus,
-}) {
+function EditTodoModal({ status, todo, closeDrawer, noticeSnackbarStatus }) {
+  const todosStatus = useTodosStatus();
+
   const close = () => {
     status.close();
     closeDrawer();
@@ -332,7 +328,6 @@ function TodoOptionDrawer({ status, noticeSnackbarStatus }) {
         noticeSnackbarStatus={noticeSnackbarStatus}
         status={editTodoModalStatus}
         todo={todo}
-        todosStatus={todosStatus}
         closeDrawer={status.close}
       />
       <SwipeableDrawer
@@ -386,7 +381,6 @@ function TodoList({ noticeSnackbarStatus }) {
               key={todo.id}
               todo={todo}
               index={index}
-              todosStatus={todosStatus}
               openDrawer={todoOptionDrawerStatus.open}
             />
           ))}
