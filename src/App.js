@@ -18,7 +18,7 @@ import { atom, useRecoilState } from "recoil";
 import RecoilEx from "./RecoilEx";
 
 import { recoilPersist } from "recoil-persist";
-const { persistAtom:persistAtomTodos } = recoilPersist({
+const { persistAtom: persistAtomTodos } = recoilPersist({
   key: "persistAtomTodos",
 });
 const { persistAtom: persistAtomLastTodoId } = recoilPersist({
@@ -29,17 +29,17 @@ const todosAtom = atom({
   key: "app/todosAtom",
   default: [
     {
-      id : 3,
+      id: 3,
       regDate: "2023-02-02 12:12:12",
       content: "공부",
     },
     {
-      id : 2,
+      id: 2,
       regDate: "2023-02-02 12:12:12",
       content: "요리",
     },
     {
-      id : 1,
+      id: 1,
       regDate: "2023-02-02 12:12:12",
       content: "운동",
     },
@@ -417,21 +417,40 @@ function TodoList({ noticeSnackbarStatus }) {
   );
 }
 
+const noticeSnackbarInfoAtom = atom({
+  key: "app/noticeSnackbarInfoAtom",
+  default: {
+    opened: false,
+    autoHideDuration: 0,
+    severity: "",
+    msg: "",
+  },
+});
+
 function useNoticeSnackbarStatus() {
-  const [opened, setOpened] = useState(false);
-  const [autoHideDuration, setAutoHideDuration] = useState(null);
-  const [severity, setSeverity] = useState(null);
-  const [msg, setMsg] = useState(null);
+  const [noticeSnackbarInfo, setNoticeSnackbarInfo] = useRecoilState(
+    noticeSnackbarInfoAtom
+  );
+
+  const opened = noticeSnackbarInfo.opened;
+  const autoHideDuration = noticeSnackbarInfo.autoHideDuration;
+  const severity = noticeSnackbarInfo.severity;
+  const msg = noticeSnackbarInfo.msg;
 
   const open = (msg, severity = "success", autoHideDuration = 6000) => {
-    setOpened(true);
-    setAutoHideDuration(autoHideDuration);
-    setSeverity(severity);
-    setMsg(msg);
+    setNoticeSnackbarInfo({
+      opened: true,
+      autoHideDuration,
+      severity,
+      msg,
+    });
   };
 
   const close = () => {
-    setOpened(false);
+    setNoticeSnackbarInfo({
+      ...noticeSnackbarInfo,
+      opened: false,
+    });
   };
 
   return {
