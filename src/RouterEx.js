@@ -36,13 +36,21 @@ function useHistory() {
       style={{ color: currentIndex == index ? "red" : null }}
       className="inline-block border border-black p-2"
     >
+      {currentIndex}
+      <br />
       {historyUrls}
     </span>
   ));
 
   const movePage = (url) => {
+    setCurrentIndex(0);
     setUrl(url);
-    setHistoryUrls([url, ...historyUrls]);
+
+    const newHistoryUrls = historyUrls.filter(
+      (_, index) => index >= currentIndex
+    );
+
+    setHistoryUrls([url, ...newHistoryUrls]);
   };
 
   const movePrev = () => {
