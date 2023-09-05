@@ -18,6 +18,7 @@ import { atom, useRecoilState } from "recoil";
 import RecoilEx from "./RecoilEx";
 
 import { recoilPersist } from "recoil-persist";
+import RouterEx from "./RouterEx";
 const { persistAtom: persistAtomTodos } = recoilPersist({
   key: "persistAtomTodos",
 });
@@ -469,7 +470,7 @@ function NoticeSnackbar() {
 function App() {
   return (
     <>
-      <AppBar position="static">
+      {/* <AppBar position="static">
         <Toolbar>
           <div className="flex-1"></div>
           <div className="font-bold">HAPPY NOTE</div>
@@ -478,8 +479,9 @@ function App() {
       </AppBar>
       <NoticeSnackbar />
       <NewTodoForm />
-      <TodoList />
+      <TodoList /> */}
       {/* <RecoilEx /> */}
+      <RouterEx />
     </>
   );
 }
