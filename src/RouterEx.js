@@ -27,6 +27,7 @@ function LoginPage() {
 
 function useHistory() {
   const initialUrl = "home";
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [url, setUrl] = useState(initialUrl);
   const [historyUrls, setHistoryUrls] = useState([initialUrl]);
 
@@ -35,10 +36,33 @@ function useHistory() {
     setHistoryUrls([url, ...historyUrls]);
   };
 
+  const movePrev = () => {
+    if (currentIndex == historyUrls.length - 1) {
+      return false;
+    }
+
+    const url = historyUrls[currentIndex + 1];
+    setUrl(url);
+    setCurrentIndex(currentIndex + 1);
+    console.log(currentIndex);
+  };
+
+  const moveNext = () => {
+    if (currentIndex == 0) {
+      return false;
+    }
+
+    const url = historyUrls[currentIndex - 1];
+    setUrl(url);
+    setCurrentIndex(currentIndex - 1);
+  };
+
   return {
     url,
     movePage,
     historyUrls,
+    movePrev,
+    moveNext,
   };
 }
 
@@ -47,7 +71,16 @@ export default function RouterEx() {
   return (
     <>
       <div className="p-5">현재 주소 : {history.url}</div>
-      <div className="p-5">History : {history.historyUrls.join(",")}</div>
+      <div className="p-5">
+        History : {history.historyUrls.join(",")}
+        <br />
+        <Button variant="outlined" onClick={history.movePrev}>
+          뒤로 가기
+        </Button>
+        <Button variant="outlined" onClick={history.moveNext}>
+          앞으로 가기
+        </Button>
+      </div>
       <ul className="flex gap-3 p-5">
         <li
           onClick={() => history.movePage("home")}
