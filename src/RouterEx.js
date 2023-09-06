@@ -1,4 +1,5 @@
-import React from "react";
+import { useScrollTrigger } from "@mui/material";
+import React, { useState } from "react";
 import {
   Routes,
   Route,
@@ -9,6 +10,29 @@ import {
   useNavigate,
 } from "react-router-dom";
 
+function useTodosStatus() {
+  const [todos, setTodos] = useState([]);
+
+  const addTodo = (content) => {
+    const id = 1;
+    const regDate = "2022-12-12 12:12:12";
+
+    const newTodo = {
+      id,
+      regDate,
+      content
+    };
+
+    const newTodos = [newTodo, ...todos];
+    setTodos(newTodos);
+  };
+
+  return {
+    todos,
+    addTodo
+  };
+}
+
 function TodoListPage() {
   return (
     <>
@@ -18,6 +42,8 @@ function TodoListPage() {
 }
 
 function TodoWritePage() {
+  const todosStatus = useTodosStatus();
+
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -25,7 +51,7 @@ function TodoWritePage() {
 
     form.content.value = form.content.value.trim();
 
-    if ( form.content.value.length == 0) {
+    if (form.content.value.length == 0) {
       alert("할 일을 입력해주세요.");
       form.content.focus();
 
@@ -34,6 +60,8 @@ function TodoWritePage() {
 
     form.content.value = "";
     form.content.focus();
+
+    todosStatus.addTodo(form.content.value);
   };
 
   return (
@@ -49,6 +77,7 @@ function TodoWritePage() {
         />
         <input type="submit" value="작성" className="input input-bordered" />
       </form>
+      <div>{todosStatus.todos.length}</div>
     </>
   );
 }
