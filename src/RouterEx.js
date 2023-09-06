@@ -20,7 +20,7 @@ function useTodosStatus() {
     const newTodo = {
       id,
       regDate,
-      content
+      content,
     };
 
     const newTodos = [newTodo, ...todos];
@@ -29,7 +29,7 @@ function useTodosStatus() {
 
   return {
     todos,
-    addTodo
+    addTodo,
   };
 }
 
@@ -88,7 +88,19 @@ export default function RouterEx() {
   return (
     <>
       <header>
-        상단바
+        <NavLink
+          to="/list"
+          style={({ isActive }) => ({ color: isActive ? "red" : null })}
+        >
+          리스트
+        </NavLink>
+        /
+        <NavLink
+          to="/write"
+          style={({ isActive }) => ({ color: isActive ? "red" : null })}
+        >
+          작성
+        </NavLink>
         <hr />
         주소 : {location.pathname}
       </header>
