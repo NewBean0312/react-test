@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react";
 import {
   Routes,
@@ -31,10 +32,28 @@ export default function RouterEx() {
       <header>
         현재 주소 : {location.pathname}
         <hr />
-        <NavLink to="/home/main" className="btn btn-link">
+        <NavLink
+          to="/home/main"
+          className={({ isActive }) =>
+            classNames(
+              "btn",
+              { "btn-link": !isActive },
+              { "btn-primary": isActive }
+            )
+          }
+        >
           MAIN
         </NavLink>
-        <NavLink to="/home/about" className="btn btn-link">
+        <NavLink
+          to="/home/about"
+          className={({ isActive }) =>
+            classNames(
+              "btn",
+              { "btn-link": !isActive },
+              { "btn-primary": isActive }
+            )
+          }
+        >
           ABOUT
         </NavLink>
       </header>
