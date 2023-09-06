@@ -1,4 +1,3 @@
-import { useScrollTrigger } from "@mui/material";
 import React, { useState } from "react";
 import {
   Routes,
@@ -9,12 +8,22 @@ import {
   useParams,
   useNavigate,
 } from "react-router-dom";
+import { atom, useRecoilState } from "recoil";
+
+const todosAtom = atom({
+  key: "recoilEx/todosAtom",
+  default: [
+    { id: 3, regDate: "2023-12-12 12:12:12", content: "운동" },
+    { id: 2, regDate: "2022-12-12 12:12:12", content: "요리" },
+    { id: 1, regDate: "2021-12-12 12:12:12", content: "공부" },
+  ]
+})
 
 function useTodosStatus() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useRecoilState(todosAtom);
 
   const addTodo = (content) => {
-    const id = 1;
+    const id = 4;
     const regDate = "2022-12-12 12:12:12";
 
     const newTodo = {
@@ -34,9 +43,18 @@ function useTodosStatus() {
 }
 
 function TodoListPage() {
+  const todosStatus = useTodosStatus();
+
   return (
     <>
       <h1>할 일 리스트</h1>
+      <ul>
+        {todosStatus.todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.id} : {todo.content}
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
@@ -57,11 +75,12 @@ function TodoWritePage() {
 
       return;
     }
+    
+    todosStatus.addTodo(form.content.value);
 
     form.content.value = "";
     form.content.focus();
 
-    todosStatus.addTodo(form.content.value);
   };
 
   return (
