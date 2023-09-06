@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef} from "react";
 import {
   Routes,
   Route,
@@ -21,9 +21,10 @@ const todosAtom = atom({
 
 function useTodosStatus() {
   const [todos, setTodos] = useRecoilState(todosAtom);
+  const lastTodoIdRef = useRef(todos[0].id);
 
   const addTodo = (content) => {
-    const id = 4;
+    const id = ++lastTodoIdRef.current;
     const regDate = "2022-12-12 12:12:12";
 
     const newTodo = {
@@ -75,7 +76,7 @@ function TodoWritePage() {
 
       return;
     }
-    
+
     todosStatus.addTodo(form.content.value);
 
     form.content.value = "";
